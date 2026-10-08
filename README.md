@@ -1,8 +1,11 @@
 # growveloper-gtm-lab
 
+## Problem
 
-problem 
- comstraints 
- decisions
- result
- what failed 
+## Constraints
+
+## Decisions
+
+## Result
+
+## What failed

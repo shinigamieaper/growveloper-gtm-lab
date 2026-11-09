@@ -20,13 +20,15 @@ message, and only then sends. It runs on my laptop every day, in my own Chrome, 
 | Calls booked | 3 |
 | Paying clients | 1 |
 
-By channel (a person can be reached on both, so the rows overlap):
+By the channel of the first message (from the system's own dashboard):
 
 | Channel | Owners messaged | Wrote back | Calls booked |
 |---|---|---|---|
-| Email | 455 | 7 | 2 |
-| LinkedIn (connection notes, InMails) | 167 | 16 | 0 |
-| Not tied to one channel on record | | 2 | 1 |
+| Email | 433 | 3 | 0 |
+| LinkedIn InMail | 97 | 14 | 1 |
+| LinkedIn connection note | 62 | 4 | 0 |
+| Other | 1 | 0 | 0 |
+| Recorded by hand (no reply date stored, or a call held outside the booking tool) | | 4 | 2 |
 
 Counts come from the system's own database. Small numbers, early days: they show the system works end to end, not a
 reply rate to plan around. Results by message type are not on record yet: messages before November were not tagged with

@@ -11,7 +11,7 @@ My own outbound system, built in Claude Code with Clay inside it. It finds small
 problem I fix, proves the problem from what it can see, writes one message per person, has a separate checker read every
 message, and only then sends. It runs on my laptop every day, in my own Chrome, at human pace.
 
-## Results so far (live since 31 Oct 2026)
+## Results so far (first message June 2026; current version since 31 Oct 2026)
 
 | Measure | Value |
 |---|---|
@@ -20,8 +20,42 @@ message, and only then sends. It runs on my laptop every day, in my own Chrome, 
 | Calls booked | 3 |
 | Paying clients | 1 |
 
+By channel (a person can be reached on both, so the rows overlap):
+
+| Channel | Owners messaged | Wrote back | Calls booked |
+|---|---|---|---|
+| Email | 455 | 7 | 2 |
+| LinkedIn (connection notes, InMails) | 167 | 16 | 0 |
+| Not tied to one channel on record | | 2 | 1 |
+
 Counts come from the system's own database. Small numbers, early days: they show the system works end to end, not a
-reply rate to plan around.
+reply rate to plan around. Results by message type are not on record yet: messages before November were not tagged with
+their type, and the approved types are only days old.
+
+## One lead, end to end (anonymised)
+
+**Who:** the owner of a US medical practice, found in Sales Navigator.
+
+**Why this business (two signals, both seen on its own site the day before the message):**
+1. *Hiring:* the careers page was hiring a front-desk coordinator, so they pay a salary for someone to chase leads by hand.
+2. *Page path:* the pricing page asked visitors to fill out a form before seeing any prices, so every price enquiry
+   becomes a lead someone has to call back.
+
+**The message it got (LinkedIn InMail; passed the code checks and the separate checker), with identifying details in
+brackets:**
+
+> Hi [first name], your [pricing page] asks people to fill out a form to see prices, and your careers page is hiring a
+> [coordinator]. That usually means each price request waits for someone to follow it up by hand.
+>
+> I built an IT firm's automatic follow-up email sequences in Zoho.
+>
+> One idea: an instant reply to every pricing request with a consult link, and two follow-ups for anyone who doesn't book.
+> Would that take some of the chasing off the new hire?
+>
+> Juwon
+
+The two signals become the opening, one proof line from a real project backs it, and the offer fixes the exact problem the
+signals point to. No price, no claim the evidence does not prove.
 
 ## The problem it solves
 

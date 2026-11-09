@@ -2,7 +2,6 @@
 
 How many named business owners can Clay, run from inside my Claude Code system, find across 1,837 companies, and at what credit cost per usable email? I ran it and wrote down what worked and what broke. The head-to-head against my own open-data chain is not run yet.
 
-VIDEO: lab-explainer.mp4 (80 seconds, captions only, no voice. Drag the MP4 from `assets/` into the GitHub README editor so it plays inline.)
 
 ## Result in numbers
 
@@ -109,7 +108,6 @@ Three checks decide whether a row counts:
 
 This lab ends at a checked list. Nothing is pushed into a CRM or sent from here yet. The plan for it: send the usable emails into a free HubSpot account by CSV or API, with the fields mapped (owner name, company, email, source list, check results) and one trigger on a new record, then send through a real sending setup. I will add it here, with a screenshot, once it exists.
 
-SCREENSHOT_NEEDED (5, only after activation is built): the HubSpot contact record showing the mapped fields filled from this list. Caption: which field came from which column, and which trigger fired. (Left as a slot on purpose: not built.)
 
 ## To reproduce
 

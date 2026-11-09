@@ -9,7 +9,7 @@ message, and only then sends. It runs on my laptop every day, in my own Chrome, 
 | Measure | Value |
 |---|---|
 | Owners messaged | 593 |
-| People who wrote back | 19 |
+| People who wrote back | 25 |
 | Calls booked | 3 |
 | Paying clients | 1 |
 

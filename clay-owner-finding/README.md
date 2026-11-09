@@ -1,4 +1,11 @@
-# growveloper-gtm-lab
+# Clay owner finding: 1,837 companies, 589 usable emails
+
+> **Problem:** only 5 of 40 leads in my lead bank were ready to send: no named owner, no trusted email.  
+> **Build:** Clay run from inside my Claude Code outbound system: owner check first, emails only for rows that pass, a domain check last.  
+> **Numbers:** 1,837 companies, 721 owners (39%), 589 usable emails, 805.8 credits, about 1.4 credits per usable email.  
+> **What failed:** the seniority filter (8 of 14 wrong people) and 597 small local businesses with no people data.  
+> **Next:** time per step, and the same 20 test companies through my own open-data chain.  
+> **Not built yet:** CRM activation.
 
 How many named business owners can Clay, run from inside my Claude Code system, find across 1,837 companies, and at what credit cost per usable email? I ran it and wrote down what worked and what broke. The head-to-head against my own open-data chain is not run yet.
 
@@ -20,7 +27,7 @@ How many named business owners can Clay, run from inside my Claude Code system, 
 | Time per step | not logged in this run (see "What I would change") |
 
 **Built with:** Clay, inside my own outbound system built in Claude Code. This run used Clay's trial plan.
-**Not claimed:** no reply rates, no meetings, no sales results. This lab stops at a clean, checked list.
+**Not claimed:** no reply rates, no meetings, no sales results in this Clay run. This lab stops at a clean, checked list; outbound results are in [outbound-system/](../outbound-system/).
 
 ## 1. Problem
 
@@ -39,7 +46,7 @@ Input per company: company name and website only. A 20-company test set is kept 
 
 ## 3. The waterfall
 
-Order: Find, Enrich, Transform, Export. Searching is free, emails cost credits, so everything is cleaned before anything is paid for.
+Order: Find, Enrich, Transform, Export. The email step is Clay's Work Email waterfall: Findymail, Prospeo, Icypeas and Enrow, each tried in turn until one returns an address. Searching is free, emails cost credits, so everything is cleaned before anything is paid for.
 
 1. **Find the owner.** The search asks for a person whose current job is founder or owner at that exact company, not a seniority level.
 2. **Check the match.** Only people who pass the owner check go on.

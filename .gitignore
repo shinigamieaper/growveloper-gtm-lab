@@ -14,8 +14,7 @@
 
 # production
 /build
-#data
-/data 
+/data/
 
 # misc
 .DS_Store

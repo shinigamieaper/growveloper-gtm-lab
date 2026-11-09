@@ -1,5 +1,12 @@
 # My outbound system
 
+> **Problem:** cold outreach goes to the wrong person with a message that could be about anyone.  
+> **Build:** finds named owners, proves a problem from their own site and ads, writes one message each, a separate checker reads it, then it sends at human pace.  
+> **Numbers:** 593 owners messaged, 25 wrote back, 3 calls booked, 1 paying client.  
+> **What failed:** reading runs that quit on slow pages, and nudges that waited for a person to notice them.  
+> **Next:** automatic nudges on quiet warm conversations, and rates by message type once the counts are big enough.  
+> **Not built yet:** CRM sync, rates by message type, a public message example.
+
 My own outbound system, built in Claude Code with Clay inside it. It finds small businesses that are visibly paying for a
 problem I fix, proves the problem from what it can see, writes one message per person, has a separate checker read every
 message, and only then sends. It runs on my laptop every day, in my own Chrome, at human pace.
@@ -9,7 +16,7 @@ message, and only then sends. It runs on my laptop every day, in my own Chrome, 
 | Measure | Value |
 |---|---|
 | Owners messaged | 593 |
-| People who wrote back | 25 |
+| People who wrote back (by email or LinkedIn, any reply) | 25 |
 | Calls booked | 3 |
 | Paying clients | 1 |
 
@@ -60,8 +67,7 @@ flowchart LR
   edited message is a new message.
 - **Consent by country.** Which channel is allowed depends on where the business is (sample: `code/consent.mjs`).
 - **Warm-up ramp.** Cold mailboxes send 0, 4, 8, then 10 a day by week, never above a hard cap (`code/warmup.mjs`).
-- **Lead gate.** No message to an unscored lead, a shared inbox, or anyone touched in the last 90 days
-  (`code/leadgate.mjs`).
+- **Lead gate.** No message to an unscored lead, a shared inbox, or anyone touched in the last 90 days.
 - **One pause switch** stops all sending at once, from the command line or by email.
 - **Unattended runs only draft.** Code sends only what an approval allows.
 
@@ -69,11 +75,11 @@ flowchart LR
 
 Claude Code (the windows that read, write and check), Node.js 22, SQLite (one file holds every lead, message and
 conversation), Gmail API (sending and inbox sync), Clay, LinkedIn Sales Navigator, Chrome (read and typed at human pace),
-Cal.com (bookings), Windows Task Scheduler. About 19,000 lines of code with its own test suite.
+Cal.com (bookings), Windows Task Scheduler. About 26,000 lines of code and 30,000 lines of tests.
 
 ## What is in this folder
 
-`code/` holds three modules from the system as samples of how the rules are written. They import helpers that stay private, so they are for reading, not for running. The full system is
+`code/` holds two modules from the system as samples of how the rules are written. They import helpers that stay private, so they are for reading, not for running. The full system is
 private: it holds real prospects' names, addresses and messages, and none of that belongs in a public repo.
 
 ## What I would change next

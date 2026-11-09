@@ -1,4 +1,4 @@
-// consent.mjs: which channels the law lets prospect-ops use for a cold message to this person.
+// consent.mjs: which channels the law lets my outbound system use for a cold message to this person.
 // Pure: no database, no config file. channelsAllowed() is stored on person.channels_allowed and re-read by
 // checkMessage(), which refuses a cold message on a channel that is not in the list.
 //
@@ -13,7 +13,7 @@
 //   Nigeria                              linkedin; email only to an address the business published
 //   anything else or unknown             linkedin only, both once warm
 //
-// A person is warm when he knows them or they wrote back (person.warm = 1).
+// A person is warm when I know them or they wrote back (person.warm = 1).
 
 const BOTH = ['email', 'linkedin'];
 

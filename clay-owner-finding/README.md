@@ -46,7 +46,7 @@ Input per company: company name and website only. A 20-company test set is kept 
 
 ## 3. The waterfall
 
-Order: Find, Enrich, Transform, Export. The email step is Clay's Work Email waterfall: Findymail, Prospeo, Icypeas and Enrow, each tried in turn until one returns an address. Searching is free, emails cost credits, so everything is cleaned before anything is paid for.
+Order: Find, Enrich, Transform, Export. The email step is Clay's Work Email waterfall: Findymail, Prospeo, Icypeas and Enrow, each tried in turn until one returns an address. The owner step is one Clay people search plus the owner check. Searching is free, emails cost credits, so everything is cleaned before anything is paid for.
 
 1. **Find the owner.** The search asks for a person whose current job is founder or owner at that exact company, not a seniority level.
 2. **Check the match.** Only people who pass the owner check go on.

@@ -22,7 +22,7 @@ const validRamp = (r) => Array.isArray(r) && r.length > 0 && r.every((n) => Numb
 export function readSending({ file } = {}) {
   const defaults = { ramp: [...RAMP], max_per_mailbox: MAX_PER_MAILBOX };
   try {
-    const data = JSON.parse(readFileSync(file ?? process.env.POPS_SENDING_FILE ?? SENDING_FILE, 'utf8'));
+    const data = JSON.parse(readFileSync(file ?? SENDING_FILE, 'utf8'));
     if (!data || typeof data !== 'object' || Array.isArray(data)) return defaults;
     return {
       ramp: validRamp(data.ramp) ? data.ramp : defaults.ramp,

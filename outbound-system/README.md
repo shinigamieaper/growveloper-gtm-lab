@@ -4,7 +4,7 @@
 > **Build:** finds named owners, proves a problem from their own site and ads, writes one message each, a separate checker reads it, then it sends at human pace.  
 > **Numbers:** 593 owners messaged, 25 wrote back, 3 calls booked, 1 paying client.  
 > **What failed:** reading runs that quit on slow pages, and nudges that waited for a person to notice them.  
-> **Next:** automatic nudges on quiet warm conversations, and rates by message type once the counts are big enough.  
+> **Next:** automatic nudges on quiet warm conversations.  
 > **Not built yet:** CRM sync, rates by message type, a public message example.
 
 My own outbound system, built in Claude Code with Clay inside it. It finds small businesses that are visibly paying for a
@@ -86,6 +86,5 @@ private: it holds real prospects' names, addresses and messages, and none of tha
 
 - Draft the nudge by itself when a warm conversation goes quiet past its due date (in progress).
 - Wait longer for slow pages instead of stopping a reading run (in progress).
-- Report reply and booking rates by message type and industry once the counts are big enough to mean something.
 
 Author: Obajuwon Oyekola (Juwon), [growveloper.com](https://growveloper.com)

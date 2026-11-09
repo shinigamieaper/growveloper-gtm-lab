@@ -1,4 +1,4 @@
-// leadgate.mjs: who the nightly pipeline may write to (Plan B, ruling R4; final review F3, F4, F6). Nothing here loosens what Plan A already
+// leadgate.mjs: who the nightly pipeline may write to. Nothing here loosens what the sending rules already
 // codes; it asks the same questions in one place so read-business and write-line cannot disagree.
 //
 //   writableLead(db, personId, { at }) -> { ok: true, person, company } | { ok: false, reason }
@@ -84,7 +84,7 @@ export function writableLead(db, personId, { at, needIndustry = false, ignoreLiv
     if (!consentDecision({ company, person }).channels.includes('linkedin')) return { ok: false, reason: 'no_linkedin_consent' };
   } else if (!consentDecision({ company, person }).channels.includes('email')) return { ok: false, reason: 'no_email_consent' };
 
-  // the old system touched this company (or someone there) less than 90 days ago: held, like anyone touched from growveloper in the last 90 days.
+  // the old system touched this company (or someone there) less than 90 days ago: held, like anyone touched in the last 90 days.
   // The old touches are source 'old_import' and never count as a live sequence below, so this is their one gate; 90 days or more ago they let go.
   const oldSince = new Date(Date.parse(stamp) - TURNED_AWAY_DAYS * 86_400_000).toISOString();
   const oldRecent = db.prepare("SELECT 1 FROM touch WHERE source = 'old_import' AND sent_at > ? AND (company_id = ? OR person_id IN (SELECT id FROM person WHERE company_id = ?)) LIMIT 1").get(oldSince, company.id, company.id);
@@ -109,7 +109,7 @@ export function writableLead(db, personId, { at, needIndustry = false, ignoreLiv
     )
     .get(person.id, since, ...NOT_ABOUT_THE_PERSON);
   if (away) return { ok: false, reason: 'declined_lately' };
-  // 8 Nov (Juwon, from a live card: a first message was written for a lead "not scored yet"): the writers refuse a company with no score, or with a score under
+  // The writers refuse a company with no score, or with a score under
   // the message type's line (config/thresholds.json). A hold, never a park: it is written once it is scored. A confirmed problem raises the pain part of the score; it does not skip it.
   if (needScore) {
     if (company.score === null || company.score === undefined || !Number.isFinite(Number(company.score))) return { ok: false, reason: 'not_scored' };

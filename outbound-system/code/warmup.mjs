@@ -1,4 +1,4 @@
-// warmup.mjs: how many cold emails one cold mailbox may send today (spec section 6, "Deliverability before volume").
+// warmup.mjs: how many cold emails one cold mailbox may send today. Deliverability comes before volume.
 //
 // A real ramp per cold mailbox, counted in whole Lagos weeks from the day the mailbox was added (`pops mailbox add`
 // stamps mailbox.warmup_started_at): week 1 none, week 2 four a day, week 3 eight, week 4 and after ten. Follow-ups

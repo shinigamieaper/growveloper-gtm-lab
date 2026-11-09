@@ -73,7 +73,7 @@ Cal.com (bookings), Windows Task Scheduler. About 19,000 lines of code with its 
 
 ## What is in this folder
 
-`code/` holds three modules from the system, unchanged, as samples of how the rules are written. The full system is
+`code/` holds three modules from the system as samples of how the rules are written. They import helpers that stay private, so they are for reading, not for running. The full system is
 private: it holds real prospects' names, addresses and messages, and none of that belongs in a public repo.
 
 ## What I would change next

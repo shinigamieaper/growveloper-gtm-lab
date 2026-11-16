@@ -2,8 +2,8 @@
 
 > **Problem:** cold outreach goes to the wrong person with a message that could be about anyone.  
 > **Build:** finds named owners, proves a problem from their own site and ads, writes one message each, a separate checker reads it, then it sends at human pace.  
-> **Numbers:** 593 owners messaged, 25 wrote back, 3 calls booked, 1 paying client.  
-> **What failed:** reading runs that quit on slow pages, and nudges that waited for a person to notice them.  
+> **Numbers:** 3 calls booked with different businesses, 2 proposals, 2 paying clients.  
+> **What failed:** a week of zero drafts and zero errors: a score bar silently held 174 of 198 companies (fixed, and now watched daily).  
 > **Next:** automatic nudges on quiet warm conversations.  
 > **Not built yet:** CRM sync, rates by message type, a public message example.
 
@@ -15,24 +15,12 @@ message, and only then sends. It runs on my laptop every day, in my own Chrome, 
 
 | Measure | Value |
 |---|---|
-| Owners messaged | 593 |
-| People who wrote back (by email or LinkedIn, any reply) | 25 |
-| Calls booked | 3 |
-| Paying clients | 1 |
+| Calls booked (different businesses) | 3 |
+| Proposals sent | 2 |
+| Paying clients | 2 |
 
-By the channel of the first message (from the system's own dashboard):
-
-| Channel | Owners messaged | Wrote back | Calls booked |
-|---|---|---|---|
-| Email | 433 | 3 | 0 |
-| LinkedIn InMail | 97 | 14 | 1 |
-| LinkedIn connection note | 62 | 4 | 0 |
-| Other | 1 | 0 | 0 |
-| Recorded by hand (no reply date stored, or a call held outside the booking tool) | | 4 | 2 |
-
-Counts come from the system's own database. Small numbers, early days: they show the system works end to end, not a
-reply rate to plan around. Results by message type are not on record yet: messages before November were not tagged with
-their type, and the approved types are only days old.
+Small numbers, early days: they show the system works end to end, not a rate to plan around. The rebuilt version is
+measured by the date of each person's first message, and no rate is quoted until at least 40 people stand behind it.
 
 ## One lead, end to end (anonymised)
 
@@ -69,8 +57,8 @@ about something true I can point to on their own site or ads, and nothing leaves
 
 ```mermaid
 flowchart LR
-  A[Find\nSales Navigator searches\nClay owner lookup] --> B[Read\nthe business's site, ads, reviews\nscore the lead]
-  B -->|score under the bar| X[Parked]
+  A[Find\nSales Navigator searches\nClay owner lookup] --> B[Read\nthe business's site, ads, reviews\nprove one sign of need]
+  B -->|no proven sign| X[Parked]
   B --> C[Write\none line from a proven fact\ninto an approved message type]
   C --> D[Check\nhard rules in code\nthen a separate AI checker]
   D -->|fix or block| C
@@ -84,14 +72,15 @@ flowchart LR
 
 1. **Find.** Saved Sales Navigator searches and lead lists, plus Clay for the owner and a verified email. Only a named
    person who runs the business goes on; a shared inbox (info@, office@) never does.
-2. **Read.** The system reads each company's own site, its ads and its reviews, and scores the lead. A lead under the
-   score bar is parked, never written to.
+2. **Read.** The system reads each company's own site, its ads and its reviews against six services, and the strongest
+   proven sign of need wins. A fact only counts if its quote is found word for word on the page. No proven sign, no message.
 3. **Write.** One personal line written from a fact the system saw and saved, dropped into a message type I approved.
 4. **Check.** Hard rules in code first (no price in a cold message, no claim the saved evidence does not prove, one
    approved proof line, consent by country), then a separate AI checker that did not write the message reads it as the
    owner would. A fault sends it back once; a second fault parks the company.
-5. **Approve.** A new message type needs my yes on ten real samples. After that, messages of that type go without a
-   tap; any change of angle, proof or wording voids the approval.
+5. **Approve.** Every message lands on my review desk, and I send, edit or reject it: AI drafts, I decide. A message
+   type can be cleared to send on its own after my yes on ten real samples, but while the system is young every send
+   waits for my tap. Any change of angle, proof or wording voids an approval.
 6. **Send.** Cold email only from separate warmed-up mailboxes on a daily ramp, inside the recipient's working hours,
    plain text, no open tracking. LinkedIn is typed in my own browser at human pace, one session at a time under a lock.
 7. **Follow through.** A worker syncs the inbox every five minutes. A hard bounce pauses that mailbox. Replies, bookings
@@ -103,9 +92,11 @@ flowchart LR
   edited message is a new message.
 - **Consent by country.** Which channel is allowed depends on where the business is (sample: `code/consent.mjs`).
 - **Warm-up ramp.** Cold mailboxes send 0, 4, 8, then 10 a day by week, never above a hard cap (`code/warmup.mjs`).
-- **Lead gate.** No message to an unscored lead, a shared inbox, or anyone touched in the last 90 days.
+- **Lead gate.** No message without a proven sign, to a shared inbox, or to anyone touched in the last 90 days.
 - **One pause switch** stops all sending at once, from the command line or by email.
-- **Unattended runs only draft.** Code sends only what an approval allows.
+- **Unattended runs only draft.** Code sends only what an approval allows, and today every send waits for my tap.
+- **Daily canary.** Every working morning, code checks that each stage (inbox read, signals, plays, exports, new leads)
+  wrote something the day before. A stage that has quietly stopped is named in one email.
 
 ## Stack
 
@@ -117,6 +108,15 @@ Cal.com (bookings), Windows Task Scheduler. About 26,000 lines of code and 30,00
 
 `code/` holds two modules from the system as samples of how the rules are written. They import helpers that stay private, so they are for reading, not for running. The full system is
 private: it holds real prospects' names, addresses and messages, and none of that belongs in a public repo.
+
+## What broke: the silent hold (9 November 2026)
+
+The system wrote zero drafts for a week and logged zero errors. The cause was one number: a company with one proven fact
+scored exactly 35, and the writers only started at 55, so 174 of 198 routed companies could never get a message. Nothing
+broke; it quietly held. The review found nine causes of that kind (a step that ended the whole chain, a job stopped
+before its batch finished, a day's lookups asked for all at once), and each was fixed in code. The score no longer
+decides; the proven sign does. Then came the daily canary above, so a stage that goes quiet is noticed the next morning,
+not a week later.
 
 ## What I would change next
 

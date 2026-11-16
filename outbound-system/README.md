@@ -57,39 +57,18 @@ about something true I can point to on their own site or ads, and nothing leaves
 
 ```mermaid
 flowchart LR
-  A[Find
-Clay, Sales Navigator,
-job boards, ad libraries] --> B[One door in
-dedupe, no shared inboxes,
-signs stored as unseen]
-  B --> C[Enrich
-named owner,
-verified or published email]
-  C --> D[Read and prove
-own site, ads, rivals
-quote must be on the page]
+  A[Find\nClay, Sales Navigator,\njob boards, ad libraries] --> B[One door in\ndedupe, no shared inboxes,\nsigns stored as unseen]
+  B --> C[Enrich\nnamed owner,\nverified or published email]
+  C --> D[Read and prove\nown site, ads, rivals\nquote must be on the page]
   D -->|nothing proven| X[No message]
-  D --> E[Route
-read against six services
-strongest proven sign wins]
-  E --> F[Write
-one line from the proven fact
-into a fixed message type]
-  F --> G[Check
-hard rules in code,
-then a separate AI checker]
+  D --> E[Route\nread against six services\nstrongest proven sign wins]
+  E --> F[Write\none line from the proven fact\ninto a fixed message type]
+  F --> G[Check\nhard rules in code,\nthen a separate AI checker]
   G -->|fix, at most twice| F
-  G --> H[Review desk
-I send, edit or reject
-approval locked to the exact text]
-  H --> I[Send
-worker every 5 min,
-every gate asked again]
-  I --> J[Inbox every 5 min
-a reply stops every touch,
-a bounce pauses the mailbox]
-  J --> K[Booked call
-call card 3 hours before]
+  G --> H[Review desk\nI send, edit or reject\napproval locked to the exact text]
+  H --> I[Send\nworker every 5 min,\nevery gate asked again]
+  I --> J[Inbox every 5 min\na reply stops every touch,\na bounce pauses the mailbox]
+  J --> K[Booked call\ncall card 3 hours before]
 ```
 
 1. **Find.** Clay company and people search, saved Sales Navigator searches and alerts, public job boards, funding news,

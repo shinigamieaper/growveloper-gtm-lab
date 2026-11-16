@@ -57,18 +57,27 @@ about something true I can point to on their own site or ads, and nothing leaves
 
 ```mermaid
 flowchart TD
-  A["Find<br/>Clay, Sales Navigator,<br/>job boards, ad libraries"] --> B["One door in<br/>dedupe, no shared inboxes,<br/>signs stored as unseen"]
-  B --> C["Enrich<br/>Clay first: named owner,<br/>verified or published email"]
-  C --> D["Read and prove<br/>own site, ads, rivals,<br/>quote must be on the page"]
+  subgraph S1["1. Find the right owner, prove the need"]
+    direction LR
+    A["Find<br/>Clay, Sales Navigator,<br/>job boards, ad libraries"] --> B["One door in<br/>dedupe, no shared inboxes,<br/>signs stored as unseen"]
+    B --> C["Enrich<br/>Clay first: named owner,<br/>verified or published email"]
+    C --> D["Read and prove<br/>own site, ads, rivals,<br/>quote must be on the page"]
+  end
+  subgraph S2["2. Say one true thing, check it twice"]
+    direction LR
+    E["Route<br/>six service playbooks,<br/>strongest sign wins (1, 2, 3)"] --> F["Write<br/>pain first, then the evidence,<br/>the offer fits this person"]
+    F --> G["Check<br/>truth and safety in code,<br/>then a separate AI checker"]
+    G -->|fix, at most twice| F
+    G --> H["Review desk<br/>every message is a card,<br/>I press Send"]
+  end
+  subgraph S3["3. Send at human pace, follow through"]
+    direction LR
+    I["Send<br/>email first, then LinkedIn,<br/>every gate asked again"] --> J["Inbox every 5 min<br/>a reply stops every touch,<br/>quiet warm leads get a nudge"]
+    J --> K["Booked call<br/>call card 3 hours before"]
+  end
   D -->|nothing proven| X["No message<br/>looked at again later"]
-  D --> E["Route<br/>six service playbooks,<br/>strongest sign wins (1, 2, 3)"]
-  E --> F["Write<br/>pain first, then the evidence,<br/>the offer fits this person"]
-  F --> G["Check<br/>truth and safety in code,<br/>then a separate AI checker"]
-  G -->|fix, at most twice| F
-  G --> H["Review desk<br/>every message is a card,<br/>I press Send"]
-  H --> I["Send<br/>email first, then LinkedIn,<br/>every gate asked again"]
-  I --> J["Inbox every 5 min<br/>a reply stops every touch,<br/>quiet warm leads get a nudge"]
-  J --> K["Booked call<br/>call card 3 hours before"]
+  D --> E
+  H --> I
 ```
 
 **One Claude Code window runs the day.** Every morning a single lead-work window opens and does the whole chain in

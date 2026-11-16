@@ -56,7 +56,7 @@ about something true I can point to on their own site or ads, and nothing leaves
 ## How it works
 
 ```mermaid
-flowchart LR
+flowchart TD
   A["Find<br/>Clay, Sales Navigator,<br/>job boards, ad libraries"] --> B["One door in<br/>dedupe, no shared inboxes,<br/>signs stored as unseen"]
   B --> C["Enrich<br/>Clay first: named owner,<br/>verified or published email"]
   C --> D["Read and prove<br/>own site, ads, rivals,<br/>quote must be on the page"]

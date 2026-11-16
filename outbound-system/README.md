@@ -1,15 +1,15 @@
 # My outbound system
 
 > **Problem:** cold outreach goes to the wrong person with a message that could be about anyone.  
-> **Build:** finds small businesses with a visible sign they need one of six services, proves the sign on their own page, writes one line from it, checks it twice, and puts every first message on my review desk for my Send.  
+> **Build:** finds small businesses with a visible sign they need one of six services, proves the sign on their own page, writes one message from it, checks it twice, and puts every message on my review desk for my Send.  
 > **Numbers:** 3 calls booked with different businesses, 2 proposals, 2 paying clients.  
 > **What failed:** a week of zero drafts and zero errors: a score bar silently held 174 of 198 companies (fixed, and now watched daily).  
-> **Next:** automatic nudges on quiet warm conversations.  
-> **Not built yet:** CRM sync, rates by message type (too few people yet).
+> **Next:** rates by message type and channel once 40 people stand behind each.  
+> **Not built yet:** CRM sync.
 
 My own outbound system, built in Claude Code with Clay inside it. AI decides what is worth saying; code decides whether it
-is allowed to leave; I decide what actually goes. It runs on my laptop every day: a worker every five minutes, LinkedIn
-read and typed in my own Chrome at human pace.
+is allowed to leave; I decide what actually goes. It runs on my laptop every day: one Claude Code window does the day's chain, a worker sends every five
+minutes, and LinkedIn is read and typed in my own Chrome at human pace.
 
 ## Results so far (first message June 2026; current version since 31 Oct 2026)
 
@@ -57,46 +57,63 @@ about something true I can point to on their own site or ads, and nothing leaves
 
 ```mermaid
 flowchart LR
-  A[Find\nClay, Sales Navigator,\njob boards, ad libraries] --> B[One door in\ndedupe, no shared inboxes,\nsigns stored as unseen]
-  B --> C[Enrich\nnamed owner,\nverified or published email]
-  C --> D[Read and prove\nown site, ads, rivals\nquote must be on the page]
-  D -->|nothing proven| X[No message]
-  D --> E[Route\nread against six services\nstrongest proven sign wins]
-  E --> F[Write\none line from the proven fact\ninto a fixed message type]
-  F --> G[Check\nhard rules in code,\nthen a separate AI checker]
+  A["Find<br/>Clay, Sales Navigator,<br/>job boards, ad libraries"] --> B["One door in<br/>dedupe, no shared inboxes,<br/>signs stored as unseen"]
+  B --> C["Enrich<br/>Clay first: named owner,<br/>verified or published email"]
+  C --> D["Read and prove<br/>own site, ads, rivals,<br/>quote must be on the page"]
+  D -->|nothing proven| X["No message<br/>looked at again later"]
+  D --> E["Route<br/>six service playbooks,<br/>strongest sign wins (1, 2, 3)"]
+  E --> F["Write<br/>pain first, then the evidence,<br/>the offer fits this person"]
+  F --> G["Check<br/>truth and safety in code,<br/>then a separate AI checker"]
   G -->|fix, at most twice| F
-  G --> H[Review desk\nI send, edit or reject\napproval locked to the exact text]
-  H --> I[Send\nworker every 5 min,\nevery gate asked again]
-  I --> J[Inbox every 5 min\na reply stops every touch,\na bounce pauses the mailbox]
-  J --> K[Booked call\ncall card 3 hours before]
+  G --> H["Review desk<br/>every message is a card,<br/>I press Send"]
+  H --> I["Send<br/>email first, then LinkedIn,<br/>every gate asked again"]
+  I --> J["Inbox every 5 min<br/>a reply stops every touch,<br/>quiet warm leads get a nudge"]
+  J --> K["Booked call<br/>call card 3 hours before"]
 ```
+
+**One Claude Code window runs the day.** Every morning a single lead-work window opens and does the whole chain in
+order: Clay, the business pages in Chrome, routing, writing, checking, the review desk, and the LinkedIn sends I have
+approved. It loops until nothing is left that does not wait on me, and closes at 23:30 Lagos, when the last US
+recipients' working hours end. Anything that blocks it (a sign-in, a robot check, a question only I can answer) comes to
+me at once as one question. Beside it, a worker with no AI runs every five minutes for the inbox, bookings and email sends.
 
 1. **Find.** Clay company and people search, saved Sales Navigator searches and alerts, public job boards, funding news,
    and the Meta and Google ad libraries.
 2. **One door in.** Every source goes through one intake step with the same rules: a known domain merges into its company,
    a shared inbox (info@, office@) is never a person, anyone touched in the last 90 days is held, and every sign enters as
-   unseen until it is proven.
-3. **Enrich.** One named owner per company. Only an address the business published, or one a finder verified, may ever
-   get a cold email.
-4. **Read and prove.** The system reads the business's own site (and up to three nearby rivals). A fact counts as seen only
-   when its quote is found word for word in the page text; a claimed problem needs two reads at least a minute apart.
-   Unproven, nothing reaches a message.
+   unseen until it is proven. Agencies are kept, and only offered a service they do not sell themselves.
+3. **Enrich.** Clay is the main enrichment: one named owner per company and a work email. Only an address the business
+   published, or one a finder verified, may ever get a cold email. A person Clay could not look up is left out, never
+   written down as "not found".
+4. **Read and prove.** The system reads the business's own site, its ads and up to three nearby rivals. A fact counts as
+   seen only when its quote is found word for word in the page text, and a claimed problem needs two reads that agree.
+   Recency is checked in code: an ad is called live only when its last-shown date can be read. Unproven, nothing reaches a
+   message; the company is looked at again after its recheck date.
 5. **Route.** Each company is read against all six services I sell (web build, SEO and AI visibility, ads, automation,
-   growth engineering, GTM engineering). The strongest proven sign wins, and code refuses an answer that skipped a service,
-   picked a weaker sign, or quotes words not on the page.
-6. **Write.** The AI writes one personal line from the proven fact. Greeting, opt-out and footer are code, inside a fixed
-   message type.
-7. **Check.** Hard rules in code first (no price, no claim the evidence does not prove, a real first name, one link, an
-   opt-out, consent by country), then a second AI that did not write the message and can only read and give a verdict.
-   A fix goes back at most twice; then the company is set aside, not forced.
-8. **Approve.** Every first message is its own card on my review desk, and waits for my Send. AI drafts, I decide. My yes
-   is stored against a fingerprint of the exact text: change one word and it is void.
-9. **Send.** A worker with no AI runs every five minutes: inbox first, then bookings, then sends one at a time, asking
-   every gate again at the last second. Cold email goes only from separate warmed-up mailboxes, inside the recipient's
-   working hours, plain text, no open tracking. LinkedIn is typed in my own Chrome at human pace, under a lock.
+   growth engineering, GTM engineering). Each service has its own playbook, rebuilt on 14 Nov from deep research, with the
+   signs that prove a need, the angles that fit, and the proof lines I approved word for word. A sign is rated 1, 2 or 3:
+   a 3 is written first, a 2 is written, a 1 alone is only recorded. There is no score. Code refuses a route that skipped
+   a service, picked a weaker sign, or quotes words not on the page.
+6. **Write.** One message per person, pain first and then the evidence, in plain words: no dates and no source names.
+   The writer decides the subject, whether a proof line belongs, and the offer, which is the
+   next step for that person (a 30-minute look at the problem found, a demo or a draft), at most once per sequence. The
+   free piece is made after a call is booked (one measured test aside). Greeting, opt-out and footer are code.
+7. **Check.** Code guards truth and safety: no price, no claim the evidence does not prove, a real first name, one link,
+   an opt-out, consent by country. Craft is learned, not hard-coded. Then a second AI that did not write the message reads
+   it against the page and the evidence and gives a verdict. A fix goes back at most twice; then the company is set aside.
+8. **Approve.** Every message, first touch, follow-up and close, is its own card on my review desk: who the company is,
+   what they already got from me and when, why this one goes, and the date it was written. I press Send, edit or reject.
+   My yes is stored against a fingerprint of the exact text: change one word and it is void.
+9. **Send, in channel order.** For the strongest leads (a 3, up to 15 a week): email on day 1, a LinkedIn connection note
+   naming the same finding 3 days later, a message once they accept, and an InMail 7 days after the note if they have not
+   (open profiles first, their InMail is free). Everyone else gets the email sequence first, then a connection note 4 days
+   after its last step. A person with no email starts on LinkedIn. LinkedIn runs on a weekly budget, typed in my own Chrome
+   at human pace under a lock. Cold email goes only from separate warmed-up mailboxes, inside the recipient's working
+   hours, plain text, no open tracking.
 10. **Follow through.** A reply on any channel stops every live touch to that person. A bounce suppresses the address and
-    pauses the mailbox. A sorter labels each reply; only simple ones (times, the booking link) are answered without me, and
-    never anything about price or scope.
+    pauses the mailbox. A sorter labels each reply; only simple ones (times, the booking link) are answered without me,
+    and never anything about price or scope. A warm conversation that goes quiet gets a nudge on the channel we did not use
+    last, as a card for my Send. A booked call gets a call card three hours before.
 
 ## Guardrails (the part I care most about)
 
@@ -112,7 +129,7 @@ flowchart LR
 
 ## Stack
 
-Claude Code (the windows that read, route, write and check), Node.js 22, SQLite (one file holds every lead, signal,
+Claude Code (one lead-work window a day reads, routes, writes and checks; a separate checker agent reviews), Node.js 22, SQLite (one file holds every lead, signal,
 message and conversation, with triggers that refuse a send the rules forbid), Gmail API (sending and inbox sync), Clay,
 LinkedIn Sales Navigator, Chrome (read and typed at human pace), Playwright (reading public pages), Cal.com (bookings),
 Windows Task Scheduler. About 28,000 lines of code and 31,000 lines of tests.
@@ -134,7 +151,7 @@ not a week later.
 
 ## What I would change next
 
-- Draft the nudge by itself when a warm conversation goes quiet past its due date (in progress).
+- Rates by message type and channel, once at least 40 people stand behind each.
 - Wait longer for slow pages instead of stopping a reading run (in progress).
 
 Author: Obajuwon Oyekola (Juwon), [growveloper.com](https://growveloper.com)

@@ -1,19 +1,19 @@
-// consent.mjs: which channels the law lets my outbound system use for a cold message to this person.
+// consent.mjs: which channels the law lets prospect-ops use for a cold message to this person (spec 8.14, 4.2, 3).
 // Pure: no database, no config file. channelsAllowed() is stored on person.channels_allowed and re-read by
 // checkMessage(), which refuses a cold message on a channel that is not in the list.
 //
 //   US                                   email and linkedin
 //   UK limited company, LLP, PLC         email and linkedin
 //   UK sole trader, partnership, or a    linkedin only, both once warm (PECR: a UK corporate subscriber may be emailed
-//     legal form nobody has verified       cold, an individual may not; LinkedIn allowed everywhere)
-//   Germany and the rest of the EU/EEA   linkedin only, both once warm
+//     legal form nobody has verified       cold, an individual may not; LinkedIn opened everywhere by his 6 Nov ruling)
+//   Germany and the rest of the EU/EEA   linkedin only, both once warm (his 6 Nov ruling, "yes on LinkedIn in every country")
 //   Canada                               email only to an address the business published itself with no "no
-//                                          solicitation" note; linkedin at any degree; no override
+//                                          solicitation" note; linkedin at any degree (his 2 Nov ruling); no override
 //   UAE                                  linkedin only
 //   Nigeria                              linkedin; email only to an address the business published
-//   anything else or unknown             linkedin only, both once warm
+//   anything else or unknown             linkedin only, both once warm (his 6 Nov ruling)
 //
-// A person is warm when I know them or they wrote back (person.warm = 1).
+// A person is warm when he knows them or they wrote back (person.warm = 1).
 
 const BOTH = ['email', 'linkedin'];
 
@@ -24,7 +24,7 @@ export const EU_CODES = [
 // The EEA and Switzerland carry the same kind of consent rules, so they are held to the EU line too.
 const EUROPE_NO_CONSENT = new Set([...EU_CODES, 'IS', 'LI', 'NO', 'CH']);
 
-// Companies House types that make a UK business a corporate subscriber (plus
+// Companies House types that make a UK business a corporate subscriber (old lib/rules.mjs UK_CORPORATE_TYPES, plus
 // the plain spellings used in the person/company rows).
 const UK_CORPORATE_FORMS = new Set([
   'ltd', 'limited', 'plc', 'llp',
@@ -61,9 +61,13 @@ export function consentDecision({ company, person } = {}) {
   const warm = flag(person?.warm);
   const published = flag(person?.email_published ?? company?.email_published);
   const decide = (channels, rule) => ({ channels: [...channels], rule });
-  // A cold LinkedIn message to a business owner or decision maker is allowed
+  // His 6 Nov 2026 ruling, "yes on LinkedIn in every country": a cold LinkedIn message to a business owner or decision maker is allowed
   // everywhere; where cold email is not allowed, the person gets LinkedIn only (both channels once warm).
   const linkedinOr = (rule) => (warm ? decide(BOTH, 'warm') : decide(['linkedin'], rule));
+
+  // Juwon, 12 Nov 2026: the country rules follow each country's law for COLD messages; they are not a ban on a country. "If you send us an
+  // email, obviously consent. That's consent." Someone who emailed us may be emailed back, in any country.
+  if (String(person?.emailed_us_at ?? '').trim()) return decide(BOTH, 'emailed_us');
 
   if (country === 'US') return decide(BOTH, 'us');
 
@@ -76,7 +80,7 @@ export function consentDecision({ company, person } = {}) {
 
   if (country === 'CA') {
     if (flag(company?.no_solicitation)) return decide([], 'ca_no_solicitation');
-    // Cold email only to a published address (CASL). LinkedIn is not limited by connection degree.
+    // Cold email only to a published address (CASL). LinkedIn is not limited by degree: his 2 Nov ruling, "No CASL rule on LinkedIn".
     return decide(published ? BOTH : ['linkedin'], 'ca');
   }
 
@@ -93,7 +97,7 @@ export function channelsAllowed({ company, person } = {}) {
 }
 
 /**
- * Is this person's address one cold email may go to? Only a verified or a published one (named owners with a verified address,
+ * Is this person's address one cold email may go to? Only a verified or a published one (5 Nov: named owners with a verified address,
  * never guessed or shared). A guessed, unknown or bounced address gets no cold email, whatever the score.
  */
 export function emailUsableForCold(person) {

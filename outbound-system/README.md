@@ -115,7 +115,7 @@ flowchart LR
 Claude Code (the windows that read, route, write and check), Node.js 22, SQLite (one file holds every lead, signal,
 message and conversation, with triggers that refuse a send the rules forbid), Gmail API (sending and inbox sync), Clay,
 LinkedIn Sales Navigator, Chrome (read and typed at human pace), Playwright (reading public pages), Cal.com (bookings),
-Windows Task Scheduler. About 27,000 lines of code and 30,000 lines of tests.
+Windows Task Scheduler. About 28,000 lines of code and 31,000 lines of tests.
 
 ## What is in this folder
 

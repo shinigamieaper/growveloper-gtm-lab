@@ -1,6 +1,6 @@
-// warmup.mjs: how many cold emails one cold mailbox may send today. Deliverability comes before volume.
+// warmup.mjs: how many cold emails one cold mailbox may send today (spec section 6, "Deliverability before volume").
 //
-// A real ramp per cold mailbox, counted in whole Lagos weeks from the day the mailbox was added (the mailbox add command
+// A real ramp per cold mailbox, counted in whole Lagos weeks from the day the mailbox was added (`pops mailbox add`
 // stamps mailbox.warmup_started_at): week 1 none, week 2 four a day, week 3 eight, week 4 and after ten. Follow-ups
 // count. Never above max_per_mailbox. A client mailbox (hello@growveloper.com) and a paused mailbox send no cold mail.
 // A mailbox with no start date is in week one. config/sending.json holds the ramp and the maximum.
@@ -22,7 +22,7 @@ const validRamp = (r) => Array.isArray(r) && r.length > 0 && r.every((n) => Numb
 export function readSending({ file } = {}) {
   const defaults = { ramp: [...RAMP], max_per_mailbox: MAX_PER_MAILBOX };
   try {
-    const data = JSON.parse(readFileSync(file ?? SENDING_FILE, 'utf8'));
+    const data = JSON.parse(readFileSync(file ?? process.env.POPS_SENDING_FILE ?? SENDING_FILE, 'utf8'));
     if (!data || typeof data !== 'object' || Array.isArray(data)) return defaults;
     return {
       ramp: validRamp(data.ramp) ? data.ramp : defaults.ramp,

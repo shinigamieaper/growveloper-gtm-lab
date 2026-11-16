@@ -62,6 +62,7 @@ flowchart TD
     A["Find<br/>Clay, Sales Navigator,<br/>job boards, ad libraries"] --> B["One door in<br/>dedupe, no shared inboxes,<br/>signs stored as unseen"]
     B --> C["Enrich<br/>Clay first: named owner,<br/>verified or published email"]
     C --> D["Read and prove<br/>own site, ads, rivals,<br/>quote must be on the page"]
+    D -->|nothing proven| X["No message<br/>looked at again later"]
   end
   subgraph S2["2. Say one true thing, check it twice"]
     direction LR
@@ -75,9 +76,8 @@ flowchart TD
     I["Send<br/>email first, then LinkedIn,<br/>every gate asked again"] --> J["Inbox every 5 min<br/>a reply stops every touch,<br/>quiet warm leads get a nudge"]
     J --> K["Booked call<br/>call card 3 hours before"]
   end
-  D -->|nothing proven| X["No message<br/>looked at again later"]
-  D --> E
-  H --> I
+  S1 --> S2
+  S2 --> S3
 ```
 
 **One Claude Code window runs the day.** Every morning a single lead-work window opens and does the whole chain in

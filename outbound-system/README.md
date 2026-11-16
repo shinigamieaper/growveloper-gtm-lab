@@ -1,15 +1,15 @@
 # My outbound system
 
 > **Problem:** cold outreach goes to the wrong person with a message that could be about anyone.  
-> **Build:** finds named owners, proves a problem from their own site and ads, writes one message each, a separate checker reads it, then it sends at human pace.  
+> **Build:** finds small businesses with a visible sign they need one of six services, proves the sign on their own page, writes one line from it, checks it twice, and puts every first message on my review desk for my Send.  
 > **Numbers:** 3 calls booked with different businesses, 2 proposals, 2 paying clients.  
 > **What failed:** a week of zero drafts and zero errors: a score bar silently held 174 of 198 companies (fixed, and now watched daily).  
 > **Next:** automatic nudges on quiet warm conversations.  
-> **Not built yet:** CRM sync, rates by message type, a public message example.
+> **Not built yet:** CRM sync, rates by message type (too few people yet).
 
-My own outbound system, built in Claude Code with Clay inside it. It finds small businesses that are visibly paying for a
-problem I fix, proves the problem from what it can see, writes one message per person, has a separate checker read every
-message, and only then sends. It runs on my laptop every day, in my own Chrome, at human pace.
+My own outbound system, built in Claude Code with Clay inside it. AI decides what is worth saying; code decides whether it
+is allowed to leave; I decide what actually goes. It runs on my laptop every day: a worker every five minutes, LinkedIn
+read and typed in my own Chrome at human pace.
 
 ## Results so far (first message June 2026; current version since 31 Oct 2026)
 
@@ -57,57 +57,92 @@ about something true I can point to on their own site or ads, and nothing leaves
 
 ```mermaid
 flowchart LR
-  A[Find\nSales Navigator searches\nClay owner lookup] --> B[Read\nthe business's site, ads, reviews\nprove one sign of need]
-  B -->|no proven sign| X[Parked]
-  B --> C[Write\none line from a proven fact\ninto an approved message type]
-  C --> D[Check\nhard rules in code\nthen a separate AI checker]
-  D -->|fix or block| C
-  D --> E{Approved type?}
-  E -->|no| F[Card for my yes\n10 samples per type]
-  E -->|yes| G[Send\nemail on a warm-up ramp\nLinkedIn typed at human pace]
-  F --> G
-  G --> H[Inbox sync every 5 min\nreplies, bounces, unsubscribes]
-  H --> I[Reply or call\nbooked through Cal.com]
+  A[Find
+Clay, Sales Navigator,
+job boards, ad libraries] --> B[One door in
+dedupe, no shared inboxes,
+signs stored as unseen]
+  B --> C[Enrich
+named owner,
+verified or published email]
+  C --> D[Read and prove
+own site, ads, rivals
+quote must be on the page]
+  D -->|nothing proven| X[No message]
+  D --> E[Route
+read against six services
+strongest proven sign wins]
+  E --> F[Write
+one line from the proven fact
+into a fixed message type]
+  F --> G[Check
+hard rules in code,
+then a separate AI checker]
+  G -->|fix, at most twice| F
+  G --> H[Review desk
+I send, edit or reject
+approval locked to the exact text]
+  H --> I[Send
+worker every 5 min,
+every gate asked again]
+  I --> J[Inbox every 5 min
+a reply stops every touch,
+a bounce pauses the mailbox]
+  J --> K[Booked call
+call card 3 hours before]
 ```
 
-1. **Find.** Saved Sales Navigator searches and lead lists, plus Clay for the owner and a verified email. Only a named
-   person who runs the business goes on; a shared inbox (info@, office@) never does.
-2. **Read.** The system reads each company's own site, its ads and its reviews against six services, and the strongest
-   proven sign of need wins. A fact only counts if its quote is found word for word on the page. No proven sign, no message.
-3. **Write.** One personal line written from a fact the system saw and saved, dropped into a message type I approved.
-4. **Check.** Hard rules in code first (no price in a cold message, no claim the saved evidence does not prove, one
-   approved proof line, consent by country), then a separate AI checker that did not write the message reads it as the
-   owner would. A fault sends it back once; a second fault parks the company.
-5. **Approve.** Every message lands on my review desk, and I send, edit or reject it: AI drafts, I decide. A message
-   type can be cleared to send on its own after my yes on ten real samples, but while the system is young every send
-   waits for my tap. Any change of angle, proof or wording voids an approval.
-6. **Send.** Cold email only from separate warmed-up mailboxes on a daily ramp, inside the recipient's working hours,
-   plain text, no open tracking. LinkedIn is typed in my own browser at human pace, one session at a time under a lock.
-7. **Follow through.** A worker syncs the inbox every five minutes. A hard bounce pauses that mailbox. Replies, bookings
-   and promises are tracked per conversation until a call is held.
+1. **Find.** Clay company and people search, saved Sales Navigator searches and alerts, public job boards, funding news,
+   and the Meta and Google ad libraries.
+2. **One door in.** Every source goes through one intake step with the same rules: a known domain merges into its company,
+   a shared inbox (info@, office@) is never a person, anyone touched in the last 90 days is held, and every sign enters as
+   unseen until it is proven.
+3. **Enrich.** One named owner per company. Only an address the business published, or one a finder verified, may ever
+   get a cold email.
+4. **Read and prove.** The system reads the business's own site (and up to three nearby rivals). A fact counts as seen only
+   when its quote is found word for word in the page text; a claimed problem needs two reads at least a minute apart.
+   Unproven, nothing reaches a message.
+5. **Route.** Each company is read against all six services I sell (web build, SEO and AI visibility, ads, automation,
+   growth engineering, GTM engineering). The strongest proven sign wins, and code refuses an answer that skipped a service,
+   picked a weaker sign, or quotes words not on the page.
+6. **Write.** The AI writes one personal line from the proven fact. Greeting, opt-out and footer are code, inside a fixed
+   message type.
+7. **Check.** Hard rules in code first (no price, no claim the evidence does not prove, a real first name, one link, an
+   opt-out, consent by country), then a second AI that did not write the message and can only read and give a verdict.
+   A fix goes back at most twice; then the company is set aside, not forced.
+8. **Approve.** Every first message is its own card on my review desk, and waits for my Send. AI drafts, I decide. My yes
+   is stored against a fingerprint of the exact text: change one word and it is void.
+9. **Send.** A worker with no AI runs every five minutes: inbox first, then bookings, then sends one at a time, asking
+   every gate again at the last second. Cold email goes only from separate warmed-up mailboxes, inside the recipient's
+   working hours, plain text, no open tracking. LinkedIn is typed in my own Chrome at human pace, under a lock.
+10. **Follow through.** A reply on any channel stops every live touch to that person. A bounce suppresses the address and
+    pauses the mailbox. A sorter labels each reply; only simple ones (times, the booking link) are answered without me, and
+    never anything about price or scope.
 
 ## Guardrails (the part I care most about)
 
-- **Locked text.** Every message is hashed when it passes the checker; approval is stored against that hash, and an
-  edited message is a new message.
+- **Locked text.** Approval is stored against a fingerprint of the exact subject and body; an edited message is a new message.
 - **Consent by country.** Which channel is allowed depends on where the business is (sample: `code/consent.mjs`).
-- **Warm-up ramp.** Cold mailboxes send 0, 4, 8, then 10 a day by week, never above a hard cap (`code/warmup.mjs`).
-- **Lead gate.** No message without a proven sign, to a shared inbox, or to anyone touched in the last 90 days.
+- **Warm-up ramp.** Each new mailbox sends 0, 4, 8, then 10 cold emails a day by week, never above a hard cap (`code/warmup.mjs`).
+- **Reply gate.** Nothing sends if the inbox has not been read cleanly in the last 15 minutes, or a reply is still unread.
+- **No double sends.** A message is marked "sending" before the network call; an unclear error is never resent, it is
+  matched against the Sent folder instead.
 - **One pause switch** stops all sending at once, from the command line or by email.
-- **Unattended runs only draft.** Code sends only what an approval allows, and today every send waits for my tap.
 - **Daily canary.** Every working morning, code checks that each stage (inbox read, signals, plays, exports, new leads)
   wrote something the day before. A stage that has quietly stopped is named in one email.
 
 ## Stack
 
-Claude Code (the windows that read, write and check), Node.js 22, SQLite (one file holds every lead, message and
-conversation), Gmail API (sending and inbox sync), Clay, LinkedIn Sales Navigator, Chrome (read and typed at human pace),
-Cal.com (bookings), Windows Task Scheduler. About 26,000 lines of code and 30,000 lines of tests.
+Claude Code (the windows that read, route, write and check), Node.js 22, SQLite (one file holds every lead, signal,
+message and conversation, with triggers that refuse a send the rules forbid), Gmail API (sending and inbox sync), Clay,
+LinkedIn Sales Navigator, Chrome (read and typed at human pace), Playwright (reading public pages), Cal.com (bookings),
+Windows Task Scheduler. About 27,000 lines of code and 30,000 lines of tests.
 
 ## What is in this folder
 
-`code/` holds two modules from the system as samples of how the rules are written. They import helpers that stay private, so they are for reading, not for running. The full system is
-private: it holds real prospects' names, addresses and messages, and none of that belongs in a public repo.
+`code/` holds two modules from the system as samples of how the rules are written. They import helpers that stay
+private, so they are for reading, not for running. The full system is private: it holds real prospects' names,
+addresses and messages, and none of that belongs in a public repo.
 
 ## What broke: the silent hold (9 November 2026)
 
